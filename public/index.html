@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Websocket</title>
+    <link rel="shortcut icon" href="/img/favicon.png" type="image/x-icon" />
+    <link rel="stylesheet" href="/css/bootstrap.min.css" />
+  </head>
+  <body>
+    <main class="container">
+      <h1 class="text-center pt-4">Productos</h1>
+
+      <section id="productos" class="row">
+        <section class="col-lg-4 py-2">
+          <form id="formProductos">
+            <div class="row pt-4">
+              <div class="col">
+                <div class="mb-3">
+                  <label for="title" class="form-label">Nombre</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="title"
+                    name="title"
+                    required
+                  />
+                </div>
+                <div class="mb-3">
+                  <label for="price" class="form-label">Precio</label>
+                  <input
+                    type="number"
+                    class="form-control"
+                    id="price"
+                    name="price"
+                    required
+                  />
+                </div>
+                <div class="mb-3">
+                  <label for="thumbnail" class="form-label">URL Imagen</label>
+                  <input
+                    type="url"
+                    class="form-control"
+                    id="thumbnail"
+                    name="thumbnail"
+                    required
+                  />
+                </div>
+                <button type="submit" class="btn btn-primary">Agregar</button>
+                <button
+                  type="button"
+                  class="btn btn-primary"
+                  data-bs-toggle="modal"
+                  data-bs-target="#exampleModal"
+                >
+                  FakerJS
+                </button>
+              </div>
+            </div>
+          </form>
+        </section>
+        <section
+          id="tableProductos"
+          class="col-lg-8 py-2 text-center container"
+        >
+          <div class="row py-lg-1">
+            <div class="col-lg-6 col-md-8 mx-auto">
+              <h1 class="fw-light">Tabla</h1>
+            </div>
+            <div class="container py-2 bg-light">
+              <div class="table-responsive">
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th scope="col">#</th>
+                      <th scope="col">Nombre</th>
+                      <th scope="col">Precio</th>
+                      <th scope="col">Imagen</th>
+                    </tr>
+                  </thead>
+                  <tbody id="bodyTable"></tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </section>
+        <hr />
+      </section>
+
+      <h1 class="text-center">Chat</h1>
+      <section id="chat" class="row">
+        <section class="col-lg-6">
+          <form id="formChat">
+            <div class="row pt-4">
+
+              <div class="col-6">
+                <div class="mb-3">
+                  <label for="authorId" class="form-label">Id (email)</label>
+                  <input
+                    type="email"
+                    class="form-control"
+                    id="authorId"
+                    name="authorId"
+                    required
+                  />
+                </div>
+                <div class="mb-3">
+                  <label for="authorNombre" class="form-label">Nombre</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="authorNombre"
+                    name="authorNombre"
+                    required
+                  />
+                </div>
+                <div class="mb-3">
+                  <label for="authorApellido" class="form-label">Apellido</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="authorApellido"
+                    name="authorApellido"
+                    required
+                  />
+                </div>
+              </div>
+
+              <div class="col-6">
+                <div class="mb-3">
+                  <label for="authorEdad" class="form-label">Edad</label>
+                  <input
+                    type="number"
+                    class="form-control"
+                    id="authorEdad"
+                    name="authorEdad"
+                    required
+                  />
+                </div>
+                <div class="mb-3">
+                  <label for="authorAlias" class="form-label">Alias</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="authorAlias"
+                    name="authorAlias"
+                    required
+                  />
+                </div>
+                <div class="mb-3">
+                  <label for="authorAvatar" class="form-label">Avatar</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="authorAvatar"
+                    name="authorAvatar"
+                    required
+                  />
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col">
+                <div class="mb-3">
+                  <label for="mensaje" class="form-label">Mensaje</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="mensaje"
+                    name="mensaje"
+                    required
+                  />
+                </div>
+                <button type="submit" class="btn btn-primary">Enviar</button>
+              </div>
+            </div>
+          </form>
+        </section>
+        <section id="listChat" class="col-lg-6">
+          <div class="row py-lg-1">
+            <div class="col-lg-6 col-md-8 mx-auto">
+              <h1 class="fw-light text-center">Mensajes</h1>
+            </div>
+            <div class="container py-2 bg-light">
+              <ul class="list-group" id="bodyChat"></ul>
+            </div>
+          </div>
+        </section>
+      </section>
+      <hr />
+      <footer>
+        <p>
+          Server Status:
+          <span id="lblOnline" class="text-success">Online</span>
+          <span id="lblOffline" class="text-danger">Offline</span>
+        </p>
+      </footer>
+    </main>
+
+    <!-- Aca pongo el modal -->
+    <div
+      class="modal fade"
+      id="exampleModal"
+      tabindex="-1"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <!-- aca meto productosFaker -->
+            <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Nombre</th>
+                  <th scope="col">Precio</th>
+                  <th scope="col">Foto</th>
+                </tr>
+              </thead>
+              <tbody id="bodyProductosFaker"></tbody>
+            </table>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="/js/bootstrap.bundle.min.js"></script>
+    <script src="/js/handlebars-v4.7.7.js"></script>
+    <script src="/js/moment.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/normalizr@3.6.2/dist/normalizr.browser.min.js"></script>
+    <script src="/main.js"></script>
+  </body>
+</html>
